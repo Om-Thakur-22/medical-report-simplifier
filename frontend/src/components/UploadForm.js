@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
+import ReactMarkdown from "react-markdown";
 
 function UploadForm({ onReportAnalyzed }) {
   const [inputText, setInputText] = useState("");
@@ -69,7 +70,6 @@ function UploadForm({ onReportAnalyzed }) {
   const handleSpeak = () => {
     if (!result?.simplified_text) return;
 
-    // Agar already bol raha hai toh band karo
     if (isSpeaking) {
       window.speechSynthesis.cancel();
       setIsSpeaking(false);
@@ -78,7 +78,6 @@ function UploadForm({ onReportAnalyzed }) {
 
     const utterance = new SpeechSynthesisUtterance(result.simplified_text);
 
-    // Language ke hisaab se voice set karo
     if (language === "Hindi") {
       utterance.lang = "hi-IN";
     } else if (language === "Marathi") {
@@ -89,7 +88,6 @@ function UploadForm({ onReportAnalyzed }) {
 
     utterance.rate = 0.9;
     utterance.pitch = 1;
-
     utterance.onend = () => setIsSpeaking(false);
     utterance.onerror = () => setIsSpeaking(false);
 
@@ -253,15 +251,30 @@ function UploadForm({ onReportAnalyzed }) {
                 </button>
                 <button
                   onClick={handleCopy}
-                  className="text-sm bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-lg hover:bg-gray-200 dark:hover:bg-gray:600 transition"
+                  className="text-sm bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-3 py-1 rounded-lg hover:bg-gray-200 transition"
                 >
                   📋 Copy
                 </button>
               </div>
             </div>
-            <p className="text-gray-700 dark:text-gray-300 leading-relaxed whitespace-pre-line">
-              {result.simplified_text}
-            </p>
+
+            {/* Markdown rendered output */}
+            <div className="prose prose-sm max-w-none dark:prose-invert text-gray-700 dark:text-gray-300">
+              <ReactMarkdown
+                components={{
+                  h1: ({children}) => <h1 className="text-lg font-bold text-gray-800 dark:text-white mt-3 mb-1">{children}</h1>,
+                  h2: ({children}) => <h2 className="text-base font-bold text-gray-800 dark:text-white mt-3 mb-1">{children}</h2>,
+                  h3: ({children}) => <h3 className="text-base font-semibold text-gray-700 dark:text-gray-200 mt-2 mb-1">{children}</h3>,
+                  strong: ({node, ...props}) => <strong className="font-semibold text-gray-800 dark:text-white" {...props} />,
+                  ul: ({node, ...props}) => <ul className="list-disc list-inside space-y-1 my-2" {...props} />,
+                  ol: ({node, ...props}) => <ol className="list-decimal list-inside space-y-1 my-2" {...props} />,
+                  li: ({node, ...props}) => <li className="text-gray-700 dark:text-gray-300" {...props} />,
+                  p: ({node, ...props}) => <p className="mb-2 leading-relaxed" {...props} />,
+                }}
+              >
+                {result.simplified_text}
+              </ReactMarkdown>
+            </div>
           </div>
 
         </motion.div>

@@ -28,12 +28,12 @@ function UploadForm({ onReportAnalyzed }) {
         formData.append("file", file);
         formData.append("language", language);
 
-        response = await fetch("http://localhost:8000/upload-pdf", {
+        response = await fetch("https://omthakur2211-medai-backend.hf.space/upload-pdf", {
           method: "POST",
           body: formData,
         });
       } else {
-        response = await fetch("http://localhost:8000/simplify", {
+        response = await fetch("https://omthakur2211-medai-backend.hf.space/simplify", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ text: inputText, language: language }),

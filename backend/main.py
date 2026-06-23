@@ -6,6 +6,7 @@ from groq import Groq
 from biobert_model import extract_medical_entities, generate_explanation
 from dotenv import load_dotenv
 import os
+from deep_translator import GoogleTranslator
 
 load_dotenv()
 groq_client = Groq(api_key=os.getenv("GROQ_API_KEY"))
@@ -62,7 +63,7 @@ def analyze_text(text):
     return risk_score, list(set(detected_conditions))
 
 # -----------------------------
-# Simplify Function (Groq)
+# Simplify Function (Groq + Translation)
 # -----------------------------
 def simplify_text(text, language="English"):
     max_words = 300
@@ -89,8 +90,7 @@ def simplify_text(text, language="English"):
                         f"Never claim to be a real doctor. "
                         f"Be medically accurate. Use very simple easy words. "
                         f"Avoid all medical jargon. Be warm and reassuring. "
-                        f"IMPORTANT: Reply strictly in {language} language only. "
-                        f"Do not mix English words if language is Hindi or Marathi."                        
+                        f"Reply in English only."
                     )
                 },
                 {
@@ -101,7 +101,18 @@ def simplify_text(text, language="English"):
             max_tokens=700,
             temperature=0.7
         )
-        return response.choices[0].message.content.strip()
+
+        english_output = response.choices[0].message.content.strip()
+
+        # Translate if needed
+        if language == "Hindi":
+            translated = GoogleTranslator(source='en', target='hi').translate(english_output)
+            return translated
+        elif language == "Marathi":
+            translated = GoogleTranslator(source='en', target='mr').translate(english_output)
+            return translated
+        else:
+            return english_output
 
     except Exception as e:
         return f"Simplification failed: {str(e)}"

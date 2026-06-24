@@ -5,39 +5,45 @@ function HowItWorks() {
   const steps = [
     {
       icon: "📋",
-      title: "Paste or Upload Your Report",
-      description: "Copy your medical report text and paste it in the box, or directly upload your report as a PDF file.",
-      color: "blue"
+      title: "Upload Your Report",
+      description:
+        "Paste your medical report text or upload your report as a PDF file.",
+      color: "blue",
     },
     {
       icon: "🌐",
       title: "Choose Your Language",
-      description: "Select English, Hindi, or Marathi — whichever language you are most comfortable reading in.",
-      color: "green"
+      description:
+        "Select English, Hindi, or Marathi based on your preference.",
+      color: "green",
     },
     {
       icon: "🔍",
-      title: "AI Reads Your Report",
-      description: "Our AI automatically finds all important medical words, disease names, medicines, and test values in your report.",
-      color: "purple"
+      title: "AI Analyzes Your Report",
+      description:
+        "MedAI identifies important medical terms, medicines, diseases, and test values from your report.",
+      color: "purple",
     },
     {
       icon: "💬",
-      title: "Get Simple Explanation",
-      description: "Your report is explained in simple, easy words. You will understand exactly what disease you have and what each medicine does.",
-      color: "orange"
+      title: "Receive a Simplified Explanation",
+      description:
+        "The report is converted into simple language that is easier to understand.",
+      color: "orange",
     },
     {
       icon: "📊",
-      title: "See Your Risk Level",
-      description: "MedAI shows you whether your condition is Low Risk, Medium Risk, or High Risk so you know how serious it is.",
-      color: "red"
+      title: "View Risk Level",
+      description:
+        "See whether the findings are categorized as Low Risk, Medium Risk, or High Risk.",
+      color: "red",
     },
     {
       icon: "🔊",
-      title: "Listen or Copy",
-      description: "You can press the Listen button to hear the explanation out loud, or copy it to share with your family members.",
-      color: "teal"
+      title: "Listen or Share",
+      description:
+        "Listen to the explanation using audio support or copy it for sharing.",
+      color: "teal",
     },
   ];
 
@@ -51,19 +57,24 @@ function HowItWorks() {
   };
 
   return (
-    <div className="flex-1 p-6 md:p-10 bg-gray-100 dark:bg-gray-900 min-h-screen overflow-auto">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 px-6 py-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="max-w-4xl mx-auto"
+        className="max-w-5xl mx-auto"
       >
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mb-4">
-          How It Works
-        </h1>
-        <p className="text-gray-500 dark:text-gray-400 mb-10">
-          Using MedAI is very simple. Just follow these easy steps and get your report explained in seconds!
-        </p>
+        {/* Hero Section */}
+        <div className="text-center mb-10">
+          <h1 className="text-4xl font-bold text-blue-600 mb-4">
+            How MedAI Works
+          </h1>
+
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Follow a few simple steps to upload your medical report and receive
+            clear, easy-to-understand explanations in your preferred language.
+          </p>
+        </div>
 
         {/* Steps */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
@@ -74,37 +85,61 @@ function HowItWorks() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.1 }}
-              className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+              className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300"
             >
-              <div className="flex items-center gap-4 mb-3">
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${colorMap[step.color]}`}>
+              <div className="flex items-center gap-4 mb-4">
+                <div
+                  className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl ${colorMap[step.color]}`}
+                >
                   {step.icon}
                 </div>
+
                 <div>
-                  <span className="text-xs text-gray-400">Step {idx + 1}</span>
-                  <h3 className="font-semibold text-gray-800 dark:text-white">{step.title}</h3>
+                  <span className="text-xs text-gray-400 font-medium">
+                    Step {idx + 1}
+                  </span>
+
+                  <h3 className="font-semibold text-gray-800 dark:text-white">
+                    {step.title}
+                  </h3>
                 </div>
               </div>
-              <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">
+
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
                 {step.description}
               </p>
             </motion.div>
           ))}
         </div>
 
-        {/* Tips */}
-        <div className="bg-blue-50 dark:bg-gray-800 p-6 rounded-2xl shadow-md">
-          <h2 className="text-xl font-semibold text-gray-800 dark:text-white mb-4">
-            💡 Helpful Tips
+        {/* Helpful Tips */}
+        <div className="bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-md">
+          <h2 className="text-2xl font-semibold text-gray-800 dark:text-white mb-6">
+            Helpful Tips
           </h2>
-          <ul className="text-gray-600 dark:text-gray-300 space-y-3">
-            <li>📌 <strong>Before doctor visit</strong> — Use MedAI to understand your report and prepare questions for your doctor</li>
-            <li>👨‍👩‍👧 <strong>Share with family</strong> — Copy the explanation and share with your family members</li>
-            <li>🔊 <strong>Cannot read?</strong> — Use the Listen button to hear the explanation in your language</li>
-            <li>📱 <strong>Save your explanation</strong> — Copy the simplified text and save it on your phone</li>
+
+          <ul className="space-y-4 text-gray-600 dark:text-gray-300">
+            <li>
+              <strong>Before a Doctor Visit:</strong> Use MedAI to understand
+              your report and prepare questions for your doctor.
+            </li>
+
+            <li>
+              <strong>Share with Family:</strong> Copy the explanation and share
+              it with family members who may want to understand the report.
+            </li>
+
+            <li>
+              <strong>Prefer Audio?</strong> Use the Listen feature to hear the
+              explanation in your selected language.
+            </li>
+
+            <li>
+              <strong>Save for Later:</strong> Copy the simplified explanation
+              and keep it for future reference.
+            </li>
           </ul>
         </div>
-
       </motion.div>
     </div>
   );

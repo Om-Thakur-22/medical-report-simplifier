@@ -1,71 +1,128 @@
-# 🏥 MedAI — Medical Report Simplification
+# 🏥 MedAI — AI-Powered Medical Report Simplification
 
-An AI-powered web application that simplifies complex medical reports into easy-to-understand language for patients in English, Hindi, and Marathi.
+MedAI is an AI-powered healthcare application that helps patients understand complex medical reports in simple, easy-to-understand language. The platform supports English, Hindi, and Marathi, making medical information more accessible to a wider audience.
+
+---
 
 ## 🌐 Live Demo
-👉 [https://medical-report-simplifier-theta.vercel.app](https://medical-report-simplifier-theta.vercel.app)
+
+👉 https://medical-report-simplifier-theta.vercel.app
+
+---
 
 ## 🎯 Problem Statement
-Most patients in India cannot understand their medical reports due to complex medical terminology. MedAI solves this by converting reports into simple, patient-friendly language.
 
-## ✨ Features
-- 📄 Upload medical report as text or PDF
-- 🌐 3 language support — English, Hindi, Marathi
-- 🧠 BioBERT for medical entity extraction
-- 🤖 Llama 3.1 for text simplification
-- ⚠️ Risk scoring — Low / Medium / High
+Medical reports often contain technical terminology that can be difficult for patients and their families to understand.
+
+MedAI addresses this challenge by analyzing medical reports, extracting important medical entities, and generating simplified explanations in user-friendly language.
+
+---
+
+## ✨ Key Features
+
+- 📄 Upload medical reports as text or PDF
+- 🌐 Multi-language support (English, Hindi, Marathi)
+- 🧠 Medical entity extraction using BioBERT
+- 🤖 AI-powered report simplification using Llama 3.1
+- ⚠️ Risk level identification (Low / Medium / High)
 - 🔊 Text-to-Speech support
-- 📋 Copy simplified report
+- 📋 Copy and share simplified reports
+- 📱 Responsive and user-friendly interface
 
-## 🛠️ Tech Stack
+---
+
+## 🛠️ Technology Stack
+
 | Layer | Technology |
-|-------|-----------|
+|---------|------------|
 | Frontend | React.js, Tailwind CSS, Framer Motion |
 | Backend | FastAPI (Python) |
-| NER Model | BioBERT (d4data/biomedical-ner-all) |
-| LLM | Meta Llama 3.1 8B via Groq API |
+| Medical NER | BioBERT (d4data/biomedical-ner-all) |
+| Large Language Model | Meta Llama 3.1 8B via Groq API |
 | PDF Processing | PyMuPDF |
 | Frontend Hosting | Vercel |
-| Backend Hosting | HuggingFace Spaces |
+| Backend Hosting | Hugging Face Spaces |
 
-## 🔄 Workflow
-User uploads report (Text/PDF)
-↓
-BioBERT extracts medical entities
-↓
-Llama 3.1 simplifies the report
-↓
-Result shown with Risk Score + Entities + Explanation
+---
 
-## 🚀 Run Locally
+## 🔄 System Workflow
 
-**Backend:**
+```text
+Medical Report (Text / PDF)
+            │
+            ▼
+      BioBERT Model
+(Medical Entity Extraction)
+            │
+            ▼
+      Llama 3.1 Model
+   (Report Simplification)
+            │
+            ▼
+ Simplified Explanation
+            │
+ ┌──────────┼──────────┐
+ ▼          ▼          ▼
+Risk     Entities    Audio
+Level    Extracted  Support
+```
+
+---
+
+## 🚀 Local Setup
+
+### Backend
+
 ```bash
 cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
 
-**Frontend:**
+### Frontend
+
 ```bash
 cd frontend
 npm install
 npm start
 ```
 
-**Environment Variables:**
+### Environment Variables
 
-Create `.env` file in `backend` folder:
+Create a `.env` file inside the backend directory:
 
+```env
 GROQ_API_KEY=your_groq_api_key
+```
+
+---
 
 ## 🤖 AI Models Used
-- **BioBERT** — Pre-trained on 29M PubMed biomedical articles. Achieves 91% accuracy on medical NER tasks.
-- **Llama 3.1 8B** — Meta's powerful LLM accessed via Groq API for fast, free inference.
+
+### BioBERT
+
+BioBERT is a biomedical language model trained on large-scale medical and scientific literature. It is used in MedAI for extracting diseases, medicines, symptoms, and other medical entities from reports.
+
+### Llama 3.1 8B
+
+Llama 3.1 is used to convert complex medical terminology into patient-friendly explanations, making reports easier to understand.
+
+---
 
 ## ⚠️ Disclaimer
-MedAI is an AI-powered tool for educational purposes only. Always consult a qualified doctor for medical advice.
+
+MedAI provides AI-generated explanations for educational and informational purposes only. It is not intended to replace professional medical advice, diagnosis, or treatment.
+
+Always consult a qualified healthcare professional regarding medical concerns or treatment decisions.
+
+---
 
 ## 👨‍💻 Developer
+
 **Om Thakur**
-MCA — AI & Data Science
+
+Master of Computer Applications (AI & Data Science)
+
+GitHub: https://github.com/Om-Thakur-22
+
+LinkedIn: https://www.linkedin.com/in/om-thakur-ab015235b?utm_source=share_via&utm_content=profile&utm_medium=member_ios
